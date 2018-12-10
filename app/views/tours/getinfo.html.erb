@@ -1,0 +1,56 @@
+
+<main>
+  <div class="container">
+    <div class="row">
+      <div class="col-md-10">
+        <ul>
+          <h2><b>Objectives</b></h2>
+          <li>This page is aiming to provide useful informations for those who are going to visit Japan.</li>
+          <li>The informations here are provided from some other applications via APIs.</li>
+        </ul>
+      </div>
+
+      <div class="col-md-10">
+
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h1 class="panel-title">Please input the prefecture you're going to.</h1></br>
+            
+            <%# <form class="form-inline" id="input-form"> %>
+              <%= form_tag('/main', method: :get, id: "input-form") do %>
+                <%= text_field_tag :tweet, nil,  id: "weather-form-city", name: "keyword", placeholder: "City name", style: "width: 200px;"%><button title="検索" type="submit">GO</button>
+              <% end %>
+              <%# <div class="form-group">
+                <input type="text" class="form-control" placeholder="City name" id="weather-form-city">
+              </div>
+              <button type="submit" class="btn btn-primary">Send</button> %>
+              <i class="fa fa-spinner fa-spin" id="form-spinner" aria-hidden="true"></i>
+            <%# </form> %>
+
+            <div id="search-box">
+
+            </div>
+
+          </div>
+          <div class="panel-body">
+            <div class="alert alert-danger" id="form-error">
+              <p>
+                The city name you entered above is invalid.<br>
+                Edit it and try again.
+              </p>
+            </div>
+            <div class="section_label">
+              <h2><b>Weather forecast</b></h2></br>
+              location: <b id='result-city-name'></b></p>
+            </div>
+            <div class="alert alert-info" id="form-result" >
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="col-md-10" id='tweet_list' >
+        <%= render partial: 'result_twt' %>
+      </div>
+    </div>
+  </div>
+</main>
