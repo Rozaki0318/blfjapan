@@ -1,16 +1,15 @@
 class ToursController < ApplicationController
 
+  API_KEY = Rails.application.secrets.API_KEY
+
   def getinfo
     client = Twitter::REST::Client.new do |config|
-      # 事前準備で取得したキーのセット
       config.consumer_key         = Rails.application.secrets.twitter_consumer_key
       config.consumer_secret      = Rails.application.secrets.twitter_consumer_secret
     end
     @tweets = []
     since_id = nil
-    # 検索ワードが存在していたらツイートを取得
     if params[:keyword].present?
-      # リツイートを除く、検索ワードにひっかかった最新10件のツイートを取得する
       search_words = params[:keyword]
       tweets = client.search(search_words, count: 10, result_type: "recent", exclude: "retweets", since_id: since_id)
       # 取得したツイートをモデルに渡す
@@ -19,10 +18,15 @@ class ToursController < ApplicationController
         @tweets << tweet
       end
     end
+    
+    requestUrl = 'http://api.openweathermap.org/data/2.5/forecast?q=' + search_words.to_s + '&APPID=' + API_KEY
+    uri = URI.parse(requestUrl)
+    response = Net::HTTP.get(uri)
+    @weather = JSON.parse(response)
+    
     respond_to do |format|
       format.html # show.html.erb
-      format.json { render json: @tweets } # jsonを指定した場合、jsonフォーマットで返す
+      format.json { render json: { tweets: @tweets, weather: @weather }}
     end
   end
-
 end

@@ -27,28 +27,27 @@
               <i class="fa fa-spinner fa-spin" id="form-spinner" aria-hidden="true"></i>
             <%# </form> %>
 
-            <div id="search-box">
-
-            </div>
-
           </div>
-          <div class="panel-body">
-            <div class="alert alert-danger" id="form-error">
+          <%# <div class="panel-body"> %>
+            <%# <div class="alert alert-danger" id="form-error">
               <p>
                 The city name you entered above is invalid.<br>
                 Edit it and try again.
               </p>
-            </div>
-            <div class="section_label">
+            </div> %>
+            <%# <div class="section_label">
               <h2><b>Weather forecast</b></h2></br>
               location: <b id='result-city-name'></b></p>
             </div>
             <div class="alert alert-info" id="form-result" >
-            </div>
-          </div>
+            </div> %>
+          <%# </div> %>
         </div>
       </div>
-      <div class="col-md-10" id='tweet_list' >
+      <div class="col-md-5" id='weather_list' >
+        <%= render partial: 'result_weather' %>
+      </div>
+      <div class="col-md-5" id='tweet_list' >
         <%= render partial: 'result_twt' %>
       </div>
     </div>
