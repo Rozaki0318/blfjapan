@@ -1,0 +1,17 @@
+<% if @weather["cod"] == "200" %>
+  <ul>
+    <h2><b>Weather Forecast</b></h2>
+    <p>location: <b><%= %"#{params[:keyword]}" %></b></p>
+    <% @weather["list"].each_with_index do |weather, i| %>
+    <li><%= "#{(@weather["list"][i]["dt_txt"])}" %><br>
+        <%= "#{(@weather["list"][i]["main"]["temp"]-273.15).round(2)}" %>℃
+        <%= "#{(@weather["list"][i]["weather"][0]["main"])}" %>
+        <% imgurl = "http://openweathermap.org/img/w/#{@weather["list"][i]["weather"][0]["icon"]}.png" %>
+        <%= image_tag "#{imgurl}" %>
+    </li>
+    <% end %>
+  </ul>
+<% else %>
+  <p>Once you put prefecture above, </br>the weather info will be shown here.</p>
+<% end %>
+

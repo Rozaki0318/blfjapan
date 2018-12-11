@@ -32,6 +32,10 @@ gem 'jbuilder', '~> 2.5'
 
 # for twitter
 gem 'twitter'
+# for font:Roboto
+gem 'roboto'
+# for binding.pry
+gem 'pry-byebug', group: :development
 
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
