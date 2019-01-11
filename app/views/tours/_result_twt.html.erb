@@ -1,10 +1,12 @@
 <% if @tweets.present? %>
+    <h2 style="font-family: 'Lobster', cursive;"><b>Tweets for sightseeing</b></h2>
   <ul>
-    <h2><b>Tweets</b></h2>
     <% @tweets.each_with_index do |tweet, i| %>
     <div class="list">
-      <li>Tweet<%= i %>: <%= tweet.contents %> </li>
+      <li>Tweet<%= i %>:</br> <%= tweet.contents %> </li>
     </div>
     <% end %>
   </ul>
+<% else %>
+  <p>Once you put prefecture above, </br>the tweets will be shown here.</p>
 <% end %>
