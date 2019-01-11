@@ -10,19 +10,20 @@ class ToursController < ApplicationController
     @tweets = []
     since_id = nil
     if params[:keyword].present?
-      search_words = params[:keyword]
+      search_words = "#{params[:keyword]}+" "+sightseeing" 
       tweets = client.search(search_words, count: 10, result_type: "recent", exclude: "retweets", since_id: since_id)
       # 取得したツイートをモデルに渡す
       tweets.take(10).each do |tw|
         tweet = Tweet.new(tw.full_text)
         @tweets << tweet
       end
-    end
     
-    requestUrl = 'http://api.openweathermap.org/data/2.5/forecast?q=' + search_words.to_s + '&APPID=' + API_KEY
+    
+    requestUrl = 'http://api.openweathermap.org/data/2.5/forecast?q=' + params[:keyword].to_s + '&APPID=' + API_KEY
     uri = URI.parse(requestUrl)
     response = Net::HTTP.get(uri)
     @weather = JSON.parse(response)
+  end
     
     respond_to do |format|
       format.html # show.html.erb
