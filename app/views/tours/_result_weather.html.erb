@@ -1,7 +1,7 @@
 <% if @weather.present? %>
   <% if @weather["cod"] == "200" %>
+  <h2 style="font-family: 'Lobster', cursive;"><b>Weather Forecast</b></h2>
     <ul>
-      <h2><b>Weather Forecast</b></h2>
       <p>location: <b><%= %"#{params[:keyword]}" %></b></p>
       <% @weather["list"].each_with_index do |weather, i| %>
       <li><%= "#{(@weather["list"][i]["dt_txt"])}" %><br>
